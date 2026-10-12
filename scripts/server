@@ -56,9 +56,9 @@ ensure_isolate_runtime() {
         echo "[$(date +"%Y-%m-%d-%H-%M-%S")] cgroup v2 controllers not detected; skipping delegation" >&2
     fi
 
-    sudo mkdir -p "$runtime_root" "$runtime_root/locks"
-    sudo chown root:root "$runtime_root" "$runtime_root/locks"
-    echo "$cg_root" | sudo tee "$runtime_root/cgroup" > /dev/null
+    mkdir -p "$runtime_root" "$runtime_root/locks"
+    chown root:root "$runtime_root" "$runtime_root/locks"
+    echo "$cg_root" | tee "$runtime_root/cgroup" > /dev/null
 }
 
 ensure_isolate_runtime

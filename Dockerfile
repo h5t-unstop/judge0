@@ -60,7 +60,8 @@ ENTRYPOINT ["/api/docker-entrypoint.sh"]
 CMD ["/api/scripts/server"]
 
 RUN useradd -u 1000 -m -r judge0 && \
-    echo "judge0 ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers && \
+    echo "judge0 ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/judge0 && \
+    chmod 0440 /etc/sudoers.d/judge0 && \
     chown judge0: /api/tmp/
 
 USER judge0
