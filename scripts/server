@@ -66,6 +66,11 @@ ensure_isolate_runtime
 for i in $(seq 1 $RESTART_MAX_TRIES); do
     [[ -f tmp/pids/server.pid ]] && rm -f tmp/pids/server.pid
 
+    until bash -c '</dev/tcp/127.0.0.1/5432' 2>/dev/null; do
+        echo "Waiting for PostgreSQL..."
+        sleep 2
+    done
+
     rails db:create db:migrate db:seed
     rails s -b 0.0.0.0
     [[ $? -eq 0 ]] && break
